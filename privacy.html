@@ -60,6 +60,9 @@
 <h2>2-2. 쿠폰 코드와 친구 초대 (선택 사항, 로그인 필요)</h2>
 <p>설정의 "쿠폰과 친구 초대"에서 쿠폰 코드를 넣으면 앱 안 재화(단추·크리스탈)를 받을 수 있고, 로그인한 이용자에게는 초대 코드가 하나 생깁니다. 초대 코드는 로그인 계정 식별자에서 계산한 8자리 문자열이며 이메일이나 이름을 담지 않습니다. 친구가 그 코드를 넣으면 두 사람 모두 앱 안 재화를 받습니다. 이를 위해 2-1절의 서버(Cloud Firestore)에 다음만 저장됩니다: 어느 계정이 어느 쿠폰 코드를 썼는지, 어느 초대 코드로 어느 계정이 가입했는지(계정 식별자와 시각). 이 정보는 중복 지급을 막는 데만 쓰이고, 광고·분석·마케팅에 쓰지 않으며, 초대한 사람에게는 가입한 친구의 수만 보이고 누구인지는 보이지 않습니다. 계정을 삭제하면 그 계정의 쿠폰 사용 기록과 초대 기록은 더 이상 어떤 계정과도 연결되지 않습니다(초대 수 집계용 흔적만 남을 수 있으며, 8절로 삭제를 요청할 수 있습니다). 받은 재화는 2절의 기기 안 기록에 들어갑니다.</p>
 
+<h2>2-3. 공지사항과 제작자에게 문의 (선택 사항, 로그인 불필요)</h2>
+<p>설정의 "공지사항"은 제작자가 올린 업데이트 소식을 서버(2-1절의 Cloud Firestore)에서 읽어 오기만 하며, 이용자의 정보를 보내지 않습니다. 설정의 "제작자에게 문의"로 글을 보내면 <strong>적은 내용, 답장을 원할 때 직접 적은 이메일 주소(선택), 앱 버전, 기기 종류(Android/iOS), 앱 언어</strong>가 서버에 저장되고, 로그인한 상태라면 로그인 식별자(UID)도 함께 저장되어 기록 복구 같은 문의에 답할 때 어느 계정인지 확인하는 데 쓰입니다. 문의 내용은 제작자가 읽기 위해 제작자의 업무용 메신저(Slack)로 전달될 수 있습니다. 문의 내용은 답변과 앱 개선에만 쓰이고 광고·분석·마케팅에 쓰지 않으며, 8절의 메일로 삭제를 요청할 수 있습니다.</p>
+
 <h2>3. 권한</h2>
 <ul>
   <li><strong>인터넷</strong>: 로그인과 클라우드 저장에만 사용합니다(로그인하지 않으면 네트워크를 쓰지 않습니다).</li>
@@ -74,7 +77,7 @@
 <p>앱은 아동을 대상으로 하지 않으며, 로그인하지 않은 이용자로부터는 어떠한 개인정보도 수집하지 않습니다. 14세 미만 아동의 로그인은 법정대리인의 동의가 필요하며, 아동의 정보가 로그인으로 저장된 것을 알게 되면 즉시 삭제합니다.</p>
 
 <h2>6. 결제</h2>
-<p>앱에는 선택 사항인 인앱결제가 있을 수 있습니다: 방 가구와 도안을 사는 데 쓰는 앱 안 재화 "크리스탈" 묶음(소모성 상품)과, 한 번 사면 계속 함께하는 유료 친구(비소모성 상품)입니다. 크리스탈은 앱 안의 품목에만 쓰입니다. 결제는 Google Play 또는 Apple App Store의 결제 시스템이 처리하며, 앱은 카드 정보 등 결제 정보를 받거나 저장하지 않습니다. 앱이 기기에 저장하는 것은 크리스탈 잔액과 열린 친구 목록뿐이며(금액·영수증 없음), 유료 친구는 "구매 복원"으로 스토어 계정의 구매 기록을 다시 받아 열 수 있습니다. 이 정보는 이용자가 직접 만든 백업 파일이나 선택한 클라우드 저장에만 들어가고 그 밖의 어디로도 보내지 않습니다. 결제 관련 개인정보 처리는 Google·Apple의 방침을 따릅니다.</p>
+<p>앱에는 선택 사항인 인앱결제가 있을 수 있습니다: 방 가구와 도안을 사는 데 쓰는 앱 안 재화 "크리스탈" 묶음과 30일 동안 뜨개 시간에 따라 크리스탈을 주는 "뜨개 패스"(둘 다 소모성 상품, 자동 갱신 구독 아님)와, 한 번 사면 계속 함께하는 유료 친구(비소모성 상품)입니다. 크리스탈은 앱 안의 품목에만 쓰입니다. 결제는 Google Play 또는 Apple App Store의 결제 시스템이 처리하며, 앱은 카드 정보 등 결제 정보를 받거나 저장하지 않습니다. 앱이 기기에 저장하는 것은 크리스탈 잔액과 열린 친구 목록뿐이며(금액·영수증 없음), 유료 친구는 "구매 복원"으로 스토어 계정의 구매 기록을 다시 받아 열 수 있습니다. 이 정보는 이용자가 직접 만든 백업 파일이나 선택한 클라우드 저장에만 들어가고 그 밖의 어디로도 보내지 않습니다. 결제 관련 개인정보 처리는 Google·Apple의 방침을 따릅니다.</p>
 
 <h2>7. 방침 변경</h2>
 <p>이 방침이 바뀌면 이 페이지에 새 시행일과 함께 게시합니다.</p>
@@ -123,6 +126,9 @@
 <h2>2-2. Coupon codes and friend invites (optional, sign-in required)</h2>
 <p>In Settings → "Coupons & invite friends" you can enter a coupon code to receive in-app currency (buttons, crystals), and signed-in users get one invite code. The invite code is an 8-character string derived from the sign-in account identifier; it contains no email or name. When a friend enters it, both of you receive in-app currency. For this, the server from section 2-1 (Cloud Firestore) stores only: which account used which coupon code, and which account joined with which invite code (account identifier and time). This is used solely to prevent duplicate rewards, never for advertising, analytics or marketing, and the inviting user sees only how many friends joined, not who. When you delete your account, your coupon and invite records are no longer linked to any account (a count-only trace may remain; you can request its deletion via section 8). Rewards go into the on-device records described in section 2.</p>
 
+<h2>2-3. Announcements and "Contact the maker" (optional, no sign-in required)</h2>
+<p>Settings → "Announcements" only reads update news posted by the maker from the server described in section 2-1 (Cloud Firestore); nothing about you is sent. When you send a message through Settings → "Contact the maker", the server stores <strong>the text you wrote, the email address you optionally entered for a reply, the app version, the device type (Android/iOS) and the app language</strong>, and, if you are signed in, your sign-in identifier (UID) so that questions such as record recovery can be matched to the right account. Messages may be forwarded to the maker's work messenger (Slack) so they can be read. They are used only to reply and to improve the app, never for advertising, analytics or marketing, and you can request deletion via section 8.</p>
+
 <h2>3. Permissions</h2>
 <ul>
   <li><strong>Internet</strong>: used only for sign-in and cloud save (no network use without signing in).</li>
@@ -137,7 +143,7 @@
 <p>The app is not directed at children, and it collects no personal data from anyone who does not sign in. Sign-in by a child under the age required by local law needs a parent's consent; if we learn that a child's data was stored through sign-in, we delete it promptly.</p>
 
 <h2>6. Payments</h2>
-<p>The app may offer optional in-app purchases: packs of "crystals" (consumable products), an in-app currency used to buy room furniture and patterns, and paid friends you buy once and keep (non-consumable products). Crystals are spent only on items inside the app. Payments are processed by Google Play or the Apple App Store; the app never receives or stores payment details such as card numbers. The app keeps only the crystal balance and the list of unlocked friends on the device (no amounts, no receipts); a paid friend can be unlocked again with "Restore purchase", which asks the store for your account's purchases. This information goes only into a backup file you create yourself or the cloud save you choose to use, and nowhere else. Google's and Apple's own policies govern the payment data they handle.</p>
+<p>The app may offer optional in-app purchases: packs of "crystals", an in-app currency used to buy room furniture and patterns, a 30-day "knitting pass" that grants crystals for knitting time (both consumable products, not auto-renewing subscriptions), and paid friends you buy once and keep (non-consumable products). Crystals are spent only on items inside the app. Payments are processed by Google Play or the Apple App Store; the app never receives or stores payment details such as card numbers. The app keeps only the crystal balance and the list of unlocked friends on the device (no amounts, no receipts); a paid friend can be unlocked again with "Restore purchase", which asks the store for your account's purchases. This information goes only into a backup file you create yourself or the cloud save you choose to use, and nowhere else. Google's and Apple's own policies govern the payment data they handle.</p>
 
 <h2>7. Changes to this policy</h2>
 <p>Any changes will be posted on this page with a new effective date.</p>
